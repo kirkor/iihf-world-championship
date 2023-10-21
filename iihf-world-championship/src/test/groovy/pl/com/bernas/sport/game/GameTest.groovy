@@ -5,13 +5,13 @@ import spock.lang.Specification
 class GameTest extends Specification {
     def 'should be able to create game with two teams'() {
         given:
-            String visitors = 'Canada'
-            String home = 'USA'
+            String awayTeam = 'Canada'
+            String homeTeam = 'USA'
         when:
-            Game hockeyGame = new Game(home, visitors)
+            Game hockeyGame = new Game(homeTeam, awayTeam)
         then:
-            hockeyGame.homeTeam == home
-            hockeyGame.visitorsTeam == visitors
+            hockeyGame.homeTeam == homeTeam
+            hockeyGame.awayTeam == awayTeam
 
     }
 }
