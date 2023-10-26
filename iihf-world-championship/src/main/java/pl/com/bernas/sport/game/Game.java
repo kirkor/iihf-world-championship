@@ -37,7 +37,7 @@ public final class Game {
         this.state = GameState.FINISHED;
     }
 
-    public Score updateAwayTeamScore(int score) {
+    public Score updateAwayTeamScore(int score) throws GameStateException {
         return this.score.updateAwayTeamScore(score);
     }
 
@@ -50,7 +50,11 @@ public final class Game {
             this.awayTeamScore = 0;
         }
 
-        private Score updateAwayTeamScore(int score) {
+        private Score updateAwayTeamScore(int score) throws GameStateException {
+            if (state != GameState.IN_PROGRESS) {
+                throw new GameStateException("Can't update score for game that is not in progress");
+            }
+
             this.awayTeamScore = score;
             return this;
         }
