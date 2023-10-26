@@ -44,6 +44,6 @@ class GameTest extends Specification {
             Game hockeyGame = new Game(homeTeam, awayTeam)
             hockeyGame.start()
         then:
-            hockeyGame.status == IN_PROGRESS
+            hockeyGame.status == GameStatus.IN_PROGRESS
     }
 }
