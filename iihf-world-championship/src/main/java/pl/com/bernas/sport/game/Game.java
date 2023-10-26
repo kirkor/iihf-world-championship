@@ -14,6 +14,7 @@ public final class Game {
     Game(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.status = GameStatus.SCHEDULED;
     }
 
     @Override
