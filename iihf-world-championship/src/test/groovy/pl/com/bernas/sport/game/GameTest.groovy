@@ -84,4 +84,12 @@ class GameTest extends Specification {
         then:
             thrown(GameStateException)
     }
+
+    def "update score"() {
+        when:
+            hockeyGame.start()
+            hockeyGame.updateAwayTeamScore(10)
+        then:
+            hockeyGame.toString() == "${homeTeam} 0 - ${awayTeam} 10"
+    }
 }
