@@ -19,7 +19,10 @@ public final class Game {
         return this.homeTeam + " " + this.score.homeTeamScore + " - " + this.awayTeam + " " + this.score.awayTeamScore;
     }
 
-    public void start() {
+    public void start() throws GameStateException {
+        if (this.state != GameState.SCHEDULED) {
+            throw new GameStateException("Only scheduled games can be started");
+        }
         this.state = GameState.IN_PROGRESS;
     }
 
