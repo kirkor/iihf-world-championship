@@ -8,7 +8,7 @@ public final class Game {
 
     public final Score score = new Score();
 
-    public Game(String homeTeam, String awayTeam) {
+    Game(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
     }

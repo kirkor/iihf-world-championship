@@ -7,7 +7,7 @@ public class Scoreboard {
 
     private final List<Game> games = new ArrayList<>();
 
-    Game createGame(String homeTeam, String awayTeam) {
+    public Game createGame(String homeTeam, String awayTeam) {
         Game game = new Game(homeTeam, awayTeam);
         games.add(game);
         return game;
