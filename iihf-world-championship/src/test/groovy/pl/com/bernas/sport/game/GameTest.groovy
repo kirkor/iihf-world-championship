@@ -5,11 +5,14 @@ import spock.lang.Subject
 
 class GameTest extends Specification {
 
+    private def home = 'Slovakia'
+    private def away = 'Poland'
+
     @Subject
     private Game hockeyGame
 
     def setup() {
-        this.hockeyGame = new Game('Slovakia', 'Poland')
+        this.hockeyGame = new Game(home, away)
     }
 
     def "should be able to create game with two teams"() {
@@ -88,8 +91,9 @@ class GameTest extends Specification {
     def "update score"() {
         when:
             hockeyGame.start()
-            hockeyGame.updateAwayTeamScore(10)
+            def score = hockeyGame.updateAwayTeamScore(10)
         then:
-            hockeyGame.toString() == "${homeTeam} 0 - ${awayTeam} 10"
+            hockeyGame.toString() == "${home} 0 - ${away} 10"
+            score.toString() == '0-10'
     }
 }

@@ -37,13 +37,22 @@ public final class Game {
         this.state = GameState.FINISHED;
     }
 
+    public Score updateAwayTeamScore(int score) {
+        return this.score.updateAwayTeamScore(score);
+    }
+
     public class Score {
         private final int homeTeamScore;
-        private final int awayTeamScore;
+        private int awayTeamScore;
 
         private Score() {
             this.homeTeamScore = 0;
             this.awayTeamScore = 0;
+        }
+
+        private Score updateAwayTeamScore(int score) {
+            this.awayTeamScore = score;
+            return this;
         }
 
         @Override
