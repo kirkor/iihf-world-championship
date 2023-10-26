@@ -97,9 +97,25 @@ class GameTest extends Specification {
             score.toString() == '0-10'
     }
 
-    def "score can be updated only if game is in progress"() {
+    def "away team score can be updated only if game is in progress"() {
         when:
             hockeyGame.updateAwayTeamScore(10)
+        then:
+            thrown(GameStateException)
+    }
+
+    def "update home team score"() {
+        when:
+            hockeyGame.start()
+            def score = hockeyGame.updateHomeTeamScore(10)
+        then:
+            hockeyGame.toString() == "${home} 10 - ${away} 0"
+            score.toString() == '10-0'
+    }
+
+    def "away home score can be updated only if game is in progress"() {
+        when:
+            hockeyGame.updateHomeTeamScore(10)
         then:
             thrown(GameStateException)
     }
