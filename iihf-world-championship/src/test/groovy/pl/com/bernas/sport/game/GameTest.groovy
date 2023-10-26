@@ -75,4 +75,13 @@ class GameTest extends Specification {
         then:
             thrown(GameStateException)
     }
+
+    def "finished games can't be started"() {
+        when:
+            hockeyGame.start()
+            hockeyGame.finish()
+            hockeyGame.start()
+        then:
+            thrown(GameStateException)
+    }
 }
