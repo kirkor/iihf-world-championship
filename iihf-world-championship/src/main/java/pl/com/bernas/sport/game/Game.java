@@ -41,8 +41,12 @@ public final class Game {
         return this.score.updateAwayTeamScore(score);
     }
 
+    public Score updateHomeTeamScore(int score) throws GameStateException {
+        return this.score.updateHomeTeamScore(score);
+    }
+
     public class Score {
-        private final int homeTeamScore;
+        private int homeTeamScore;
         private int awayTeamScore;
 
         private Score() {
@@ -56,6 +60,15 @@ public final class Game {
             }
 
             this.awayTeamScore = score;
+            return this;
+        }
+
+        public Score updateHomeTeamScore(int score) throws GameStateException {
+            if (state != GameState.IN_PROGRESS) {
+                throw new GameStateException("Can't update score for game that is not in progress");
+            }
+
+            this.homeTeamScore = score;
             return this;
         }
 
