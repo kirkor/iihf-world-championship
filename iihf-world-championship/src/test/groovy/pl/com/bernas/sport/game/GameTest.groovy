@@ -1,8 +1,17 @@
 package pl.com.bernas.sport.game
 
 import spock.lang.Specification
+import spock.lang.Subject
 
 class GameTest extends Specification {
+
+    @Subject
+    private Game hockeyGame
+
+    def setup() {
+        this.hockeyGame = new Game('Slovakia', 'Poland')
+    }
+
     def "should be able to create game with two teams"() {
         given:
             String awayTeam = 'Canada'
@@ -45,5 +54,10 @@ class GameTest extends Specification {
             hockeyGame.start()
         then:
             hockeyGame.status == GameStatus.IN_PROGRESS
+    }
+
+    def 'game is in schedule status by default'() {
+        expect:
+            hockeyGame.status == GameStatus.SCHEDULED
     }
 }
