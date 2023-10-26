@@ -1,7 +1,7 @@
 package pl.com.bernas.sport.game;
 
 
-import static pl.com.bernas.sport.game.GameStatus.IN_PROGRESS;
+import static pl.com.bernas.sport.game.GameState.IN_PROGRESS;
 
 public final class Game {
 
@@ -9,12 +9,12 @@ public final class Game {
     public final String awayTeam;
 
     public final Score score = new Score();
-    private GameStatus status;
+    private GameState state;
 
     Game(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
-        this.status = GameStatus.SCHEDULED;
+        this.state = GameState.SCHEDULED;
     }
 
     @Override
@@ -23,11 +23,15 @@ public final class Game {
     }
 
     public void start() {
-        this.status = IN_PROGRESS;
+        this.state = IN_PROGRESS;
     }
 
-    public GameStatus getStatus() {
-        return status;
+    public GameState getState() {
+        return state;
+    }
+
+    public void finish() {
+        this.state = GameState.FINISHED;
     }
 
     public class Score {

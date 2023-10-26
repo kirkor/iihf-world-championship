@@ -53,18 +53,25 @@ class GameTest extends Specification {
             Game hockeyGame = new Game(homeTeam, awayTeam)
             hockeyGame.start()
         then:
-            hockeyGame.status == GameStatus.IN_PROGRESS
+            hockeyGame.state == GameState.IN_PROGRESS
     }
 
     def "game is in schedule status by default"() {
         expect:
-            hockeyGame.status == GameStatus.SCHEDULED
+            hockeyGame.state == GameState.SCHEDULED
     }
 
     def "game can be finished"() {
         when:
             hockeyGame.finish()
-            then
-            hockeyGame.status == GameStatus.FINISHED
+        then:
+            hockeyGame.state == GameState.FINISHED
+    }
+
+    def "only started games can be finished"() {
+        when:
+            hockeyGame.finish()
+        then:
+            thrown(GameStateException)
     }
 }
