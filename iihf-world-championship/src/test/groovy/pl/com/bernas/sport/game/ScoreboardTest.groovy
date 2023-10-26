@@ -11,4 +11,14 @@ class ScoreboardTest extends Specification {
         then:
             game.homeTeam == 'USA'
     }
+
+    def 'should return list of all games'() {
+        given:
+            Scoreboard scoreboard = new Scoreboard()
+        when:
+            scoreboard.createGame('Poland', 'Latvia')
+            scoreboard.createGame('France', 'Kazakhstan')
+        then:
+            scoreboard.games().size == 2
+    }
 }
