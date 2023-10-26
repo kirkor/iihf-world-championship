@@ -45,7 +45,7 @@ class GameTest extends Specification {
             'Czechia'  | 'Finland' || "${homeTeam} 0 - ${awayTeam} 0"
     }
 
-    def 'can start a game'() {
+    def "can start a game"() {
         given:
             String awayTeam = 'Germany'
             String homeTeam = 'Sweden'
@@ -56,8 +56,15 @@ class GameTest extends Specification {
             hockeyGame.status == GameStatus.IN_PROGRESS
     }
 
-    def 'game is in schedule status by default'() {
+    def "game is in schedule status by default"() {
         expect:
             hockeyGame.status == GameStatus.SCHEDULED
+    }
+
+    def "game can be finished"() {
+        when:
+            hockeyGame.finish()
+            then
+            hockeyGame.status == GameStatus.FINISHED
     }
 }
