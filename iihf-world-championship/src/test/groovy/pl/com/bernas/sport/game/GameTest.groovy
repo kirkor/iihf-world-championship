@@ -88,12 +88,19 @@ class GameTest extends Specification {
             thrown(GameStateException)
     }
 
-    def "update score"() {
+    def "update away team score"() {
         when:
             hockeyGame.start()
             def score = hockeyGame.updateAwayTeamScore(10)
         then:
             hockeyGame.toString() == "${home} 0 - ${away} 10"
             score.toString() == '0-10'
+    }
+
+    def "score can be updated only if game is in progress"() {
+        when:
+            hockeyGame.updateAwayTeamScore(10)
+        then:
+            thrown(GameStateException)
     }
 }
