@@ -12,7 +12,6 @@ class GameTest extends Specification {
         then:
             hockeyGame.homeTeam == homeTeam
             hockeyGame.awayTeam == awayTeam
-
     }
 
     def "each game should start with 0-0 score"() {
@@ -35,5 +34,16 @@ class GameTest extends Specification {
             'Canada'   | 'USA'     || "${homeTeam} 0 - ${awayTeam} 0"
             'Slovakia' | 'Germany' || "${homeTeam} 0 - ${awayTeam} 0"
             'Czechia'  | 'Finland' || "${homeTeam} 0 - ${awayTeam} 0"
+    }
+
+    def 'can start a game'() {
+        given:
+            String awayTeam = 'Germany'
+            String homeTeam = 'Sweden'
+        when:
+            Game hockeyGame = new Game(homeTeam, awayTeam)
+            hockeyGame.start()
+        then:
+            hockeyGame.status == IN_PROGRESS
     }
 }
