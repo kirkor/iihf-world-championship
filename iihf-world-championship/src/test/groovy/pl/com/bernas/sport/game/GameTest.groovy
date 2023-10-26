@@ -26,12 +26,14 @@ class GameTest extends Specification {
     }
 
     def "each game should be showed in format 'home team' 'score' - 'away team' 'score'"() {
-        given:
-            String homeTeam = 'Poland'
-            String awayTeam = 'France'
-        when:
+        expect:
             Game hockeyGame = new Game(homeTeam, awayTeam)
-        then:
-            hockeyGame.toString() == "${homeTeam} 0 - ${awayTeam} 0"
+            hockeyGame.toString() == summary
+
+        where:
+            homeTeam   | awayTeam  || summary
+            'Canada'   | 'USA'     || "${homeTeam} 0 - ${awayTeam} 0"
+            'Slovakia' | 'Germany' || "${homeTeam} 0 - ${awayTeam} 0"
+            'Czechia'  | 'Finland' || "${homeTeam} 0 - ${awayTeam} 0"
     }
 }

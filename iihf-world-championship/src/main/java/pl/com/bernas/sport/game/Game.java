@@ -13,6 +13,11 @@ public final class Game {
         this.awayTeam = awayTeam;
     }
 
+    @Override
+    public String toString() {
+        return this.homeTeam + " " + this.score.homeTeamScore + " - " + this.awayTeam + " " + this.score.awayTeamScore;
+    }
+
     public class Score {
         private final int homeTeamScore;
         private final int awayTeamScore;
