@@ -63,6 +63,7 @@ class GameTest extends Specification {
 
     def "game can be finished"() {
         when:
+            hockeyGame.start()
             hockeyGame.finish()
         then:
             hockeyGame.state == GameState.FINISHED

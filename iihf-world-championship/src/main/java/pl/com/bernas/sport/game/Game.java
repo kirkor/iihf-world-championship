@@ -1,8 +1,5 @@
 package pl.com.bernas.sport.game;
 
-
-import static pl.com.bernas.sport.game.GameState.IN_PROGRESS;
-
 public final class Game {
 
     public final String homeTeam;
@@ -23,14 +20,17 @@ public final class Game {
     }
 
     public void start() {
-        this.state = IN_PROGRESS;
+        this.state = GameState.IN_PROGRESS;
     }
 
     public GameState getState() {
         return state;
     }
 
-    public void finish() {
+    public void finish() throws GameStateException {
+        if (this.state != GameState.IN_PROGRESS) {
+            throw new GameStateException("Only games in progress can be finished.");
+        }
         this.state = GameState.FINISHED;
     }
 
