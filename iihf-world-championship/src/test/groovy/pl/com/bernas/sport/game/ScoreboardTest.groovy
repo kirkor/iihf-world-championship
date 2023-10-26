@@ -19,6 +19,6 @@ class ScoreboardTest extends Specification {
             scoreboard.createGame('Poland', 'Latvia')
             scoreboard.createGame('France', 'Kazakhstan')
         then:
-            scoreboard.games().size == 2
+            scoreboard.games().size() == 2
     }
 }
