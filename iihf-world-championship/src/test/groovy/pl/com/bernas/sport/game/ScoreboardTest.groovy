@@ -32,7 +32,7 @@ class ScoreboardTest extends Specification {
     def 'two games with same combination of teams can not be added into scoreboard'() {
         when:
             scoreboard.createGame('Norway', 'Finland')
-            scoreboard.createGame('Norway', 'Finland')
+            scoreboard.createGame('Finland', 'Norway')
         then:
             thrown(ScoreboardException)
     }

@@ -7,10 +7,17 @@ public final class Scoreboard {
 
     private final List<Game> games = new ArrayList<>();
 
-    public Game createGame(String homeTeam, String awayTeam) {
+    public Game createGame(String homeTeam, String awayTeam) throws ScoreboardException {
         Game game = new GameImpl(homeTeam, awayTeam);
         ScoreboardGame decoratedGame = new ScoreboardGame(game, this);
+
+        if (this.games.contains(decoratedGame)) {
+            throw new ScoreboardException("Scoreboard can't have two games with same teams");
+        }
+
         this.games.add(decoratedGame);
+
+
         return decoratedGame;
     }
 

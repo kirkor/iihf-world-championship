@@ -1,5 +1,8 @@
 package pl.com.bernas.sport.game;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 final class ScoreboardGame implements Game {
 
     private final Game game;
@@ -50,5 +53,22 @@ final class ScoreboardGame implements Game {
     @Override
     public GameImpl.Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException {
         return this.game.updateScore(homeTeamScore, awayTeamScore);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return (Objects.equals(getHomeTeam(), game.getHomeTeam()) && Objects.equals(getAwayTeam(), game.getAwayTeam()))
+                || (Objects.equals(getHomeTeam(), game.getAwayTeam()) && Objects.equals(getAwayTeam(), game.getHomeTeam()));
+    }
+
+    @Override
+    public int hashCode() {
+        String[] teams = {getHomeTeam(), getAwayTeam()};
+        Arrays.sort(teams);
+
+        return Objects.hash(Arrays.stream(teams).toArray());
     }
 }
