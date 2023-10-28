@@ -19,6 +19,12 @@ public final class Game {
         return this.homeTeam + " " + this.score.homeTeamScore + " - " + this.awayTeam + " " + this.score.awayTeamScore;
     }
 
+    /**
+     * Only scheduled game can be started, otherwise exception will be thrown.
+     * After start() Game will be in {@see GameState.IN_PROGRESS} state.
+     *
+     * @throws GameStateException when unallowed state is detected
+     */
     public void start() throws GameStateException {
         if (this.state != GameState.SCHEDULED) {
             throw new GameStateException("Only scheduled games can be started");
@@ -71,6 +77,10 @@ public final class Game {
         public Score updateHomeTeamScore(int score) throws GameStateException {
             if (state != GameState.IN_PROGRESS) {
                 throw new GameStateException("Can't update score for game that is not in progress");
+            }
+
+            if (score < 0) {
+                throw new GameStateException("Score can not be negative");
             }
 
             this.homeTeamScore = score;
