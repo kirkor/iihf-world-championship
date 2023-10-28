@@ -131,10 +131,18 @@ class GameTest extends Specification {
             hockeyGame.score.toString() == '1-0'
     }
 
-    def "game can not be updated with negative integers"() {
+    def "game can not be updated with negative integers - home team"() {
         when:
             hockeyGame.start()
             hockeyGame.updateScore(-1, 0)
+        then:
+            thrown(GameStateException)
+    }
+
+    def "game can not be updated with negative integers - away team"() {
+        when:
+            hockeyGame.start()
+            hockeyGame.updateScore(0, -1)
         then:
             thrown(GameStateException)
     }

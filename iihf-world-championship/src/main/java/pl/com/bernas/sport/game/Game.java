@@ -66,15 +66,20 @@ public final class Game {
         }
 
         private Score updateAwayTeamScore(int score) throws GameStateException {
-            if (state != GameState.IN_PROGRESS) {
-                throw new GameStateException("Can't update score for game that is not in progress");
-            }
+            validateChange(score);
 
             this.awayTeamScore = score;
             return this;
         }
 
         public Score updateHomeTeamScore(int score) throws GameStateException {
+            validateChange(score);
+
+            this.homeTeamScore = score;
+            return this;
+        }
+
+        private void validateChange(int score) throws GameStateException {
             if (state != GameState.IN_PROGRESS) {
                 throw new GameStateException("Can't update score for game that is not in progress");
             }
@@ -82,9 +87,6 @@ public final class Game {
             if (score < 0) {
                 throw new GameStateException("Score can not be negative");
             }
-
-            this.homeTeamScore = score;
-            return this;
         }
 
         @Override
