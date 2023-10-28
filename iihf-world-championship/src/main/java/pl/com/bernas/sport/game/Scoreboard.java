@@ -2,6 +2,8 @@ package pl.com.bernas.sport.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class Scoreboard {
 
@@ -26,5 +28,10 @@ public final class Scoreboard {
 
     void removeGame(Game game) {
         this.games.remove(game);
+    }
+
+    @Override
+    public String toString() {
+        return this.games.stream().map(Objects::toString).collect(Collectors.joining("\n"));
     }
 }
