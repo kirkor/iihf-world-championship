@@ -119,4 +119,15 @@ class GameTest extends Specification {
         then:
             thrown(GameStateException)
     }
+
+    def "game can be updated with absolute scores for both teams"() {
+        when:
+            hockeyGame.start()
+            def awayTeamScore = 0
+            def homeTeamScore = 1
+            def score = hockeyGame.updateScore(homeTeamScore, awayTeamScore)
+        then:
+            score.toString() == '1-0'
+            hockeyGame.score.toString() == '1-0'
+    }
 }
