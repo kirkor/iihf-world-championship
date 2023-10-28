@@ -45,6 +45,11 @@ public final class Game {
         return this.score.updateHomeTeamScore(score);
     }
 
+    public Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException {
+        this.updateHomeTeamScore(homeTeamScore);
+        return this.updateAwayTeamScore(awayTeamScore);
+    }
+
     public class Score {
         private int homeTeamScore;
         private int awayTeamScore;
