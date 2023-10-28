@@ -9,10 +9,10 @@ class GameTest extends Specification {
     private def away = 'Poland'
 
     @Subject
-    private Game hockeyGame
+    private GameImpl hockeyGame
 
     def setup() {
-        this.hockeyGame = new Game(home, away)
+        this.hockeyGame = new GameImpl(home, away)
     }
 
     def "should be able to create game with two teams"() {
@@ -20,7 +20,7 @@ class GameTest extends Specification {
             String awayTeam = 'Canada'
             String homeTeam = 'USA'
         when:
-            Game hockeyGame = new Game(homeTeam, awayTeam)
+            GameImpl hockeyGame = new GameImpl(homeTeam, awayTeam)
         then:
             hockeyGame.homeTeam == homeTeam
             hockeyGame.awayTeam == awayTeam
@@ -31,14 +31,14 @@ class GameTest extends Specification {
             String awayTeam = 'Finland'
             String homeTeam = 'Sweden'
         when:
-            Game hockeyGame = new Game(homeTeam, awayTeam)
+            GameImpl hockeyGame = new GameImpl(homeTeam, awayTeam)
         then:
             hockeyGame.score.toString() == "0-0"
     }
 
     def "each game should be showed in format 'home team' 'score' - 'away team' 'score'"() {
         expect:
-            Game hockeyGame = new Game(homeTeam, awayTeam)
+            GameImpl hockeyGame = new GameImpl(homeTeam, awayTeam)
             hockeyGame.toString() == summary
 
         where:
@@ -53,7 +53,7 @@ class GameTest extends Specification {
             String awayTeam = 'Germany'
             String homeTeam = 'Sweden'
         when:
-            Game hockeyGame = new Game(homeTeam, awayTeam)
+            GameImpl hockeyGame = new GameImpl(homeTeam, awayTeam)
             hockeyGame.start()
         then:
             hockeyGame.state == GameState.IN_PROGRESS
