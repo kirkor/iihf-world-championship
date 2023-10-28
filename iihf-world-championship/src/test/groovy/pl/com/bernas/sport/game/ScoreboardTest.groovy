@@ -21,4 +21,13 @@ class ScoreboardTest extends Specification {
         then:
             scoreboard.games().size() == 2
     }
+
+    def 'finished games should be removed from the scoreboard'() {
+        given:
+            Scoreboard scoreboard = new Scoreboard()
+        when:
+            scoreboard.createGame('Sweden', 'USA').start().finish()
+        then:
+            scoreboard.games().size() == 0
+    }
 }
