@@ -36,4 +36,13 @@ class ScoreboardTest extends Specification {
         then:
             thrown(ScoreboardException)
     }
+
+    def 'game from scoreboard can not be removed directly from game list'() {
+        when:
+            scoreboard.createGame('Poland', 'Latvia')
+            scoreboard.createGame('France', 'Kazakhstan')
+            scoreboard.games().removeFirst()
+        then:
+            thrown(UnsupportedOperationException)
+    }
 }

@@ -17,12 +17,11 @@ public final class Scoreboard {
 
         this.games.add(decoratedGame);
 
-
         return decoratedGame;
     }
 
     public List<Game> games() {
-        return this.games;
+        return List.copyOf(this.games);
     }
 
     void removeGame(Game game) {
