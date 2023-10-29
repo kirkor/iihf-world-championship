@@ -1,12 +1,15 @@
 package pl.com.bernas.sport.game;
 
+import java.time.Instant;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Objects;
 
-final class ScoreboardGame implements Game {
+final class ScoreboardGame implements Game, Comparable<ScoreboardGame> {
 
     private final Game game;
     private final Scoreboard scoreboard;
+    private String gameStartTimeInNano = "0";
 
     ScoreboardGame(Game game, Scoreboard scoreboard) {
         this.game = game;
@@ -26,6 +29,7 @@ final class ScoreboardGame implements Game {
     @Override
     public Game start() throws GameStateException {
         game.start();
+        this.gameStartTimeInNano = "" + Instant.now().getEpochSecond() + Instant.now().getNano();
         return this;
     }
 
@@ -40,19 +44,15 @@ final class ScoreboardGame implements Game {
         this.scoreboard.removeGame(this);
     }
 
-    @Override
-    public GameImpl.Score updateAwayTeamScore(int score) throws GameStateException {
-        return this.game.updateAwayTeamScore(score);
-    }
 
     @Override
-    public GameImpl.Score updateHomeTeamScore(int score) throws GameStateException {
-        return this.game.updateHomeTeamScore(score);
-    }
-
-    @Override
-    public GameImpl.Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException {
+    public Game.Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException {
         return this.game.updateScore(homeTeamScore, awayTeamScore);
+    }
+
+    @Override
+    public Score getScore() {
+        return this.game.getScore();
     }
 
     @Override
@@ -75,5 +75,15 @@ final class ScoreboardGame implements Game {
         Arrays.sort(teams);
 
         return Objects.hash(Arrays.stream(teams).toArray());
+    }
+
+    private String getGameStartTimeInNano() {
+        return this.gameStartTimeInNano;
+    }
+
+    @Override
+    public int compareTo(ScoreboardGame o) {
+        return Comparator.comparing(ScoreboardGame::getScore, Comparator.comparingInt(Score::totalScore))
+                .thenComparing(ScoreboardGame::getGameStartTimeInNano).compare(this, o);
     }
 }

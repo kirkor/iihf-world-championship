@@ -1,13 +1,14 @@
 package pl.com.bernas.sport.game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public final class Scoreboard {
 
-    private final List<Game> games = new ArrayList<>();
+    private final List<ScoreboardGame> games = new ArrayList<>();
 
     public Game createGame(String homeTeam, String awayTeam) throws ScoreboardException {
         Game game = new GameImpl(homeTeam, awayTeam);
@@ -32,6 +33,6 @@ public final class Scoreboard {
 
     @Override
     public String toString() {
-        return this.games.stream().map(Objects::toString).collect(Collectors.joining("\n"));
+        return this.games.stream().sorted(Collections.reverseOrder()).map(Objects::toString).collect(Collectors.joining("\n"));
     }
 }

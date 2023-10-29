@@ -26,9 +26,21 @@ public interface Game {
 
     void finish() throws GameStateException;
 
-    GameImpl.Score updateAwayTeamScore(int score) throws GameStateException;
+    Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException;
 
-    GameImpl.Score updateHomeTeamScore(int score) throws GameStateException;
+    Score getScore();
 
-    GameImpl.Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException;
+    interface Score {
+        Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException;
+
+        /**
+         * @return sum of scores
+         */
+        int totalScore();
+
+        /**
+         * @return score in format [home team score] - [away team score]
+         */
+        String toString();
+    }
 }

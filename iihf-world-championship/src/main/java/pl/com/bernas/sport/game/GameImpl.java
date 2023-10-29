@@ -5,7 +5,7 @@ public final class GameImpl implements Game {
     public final String homeTeam;
     public final String awayTeam;
 
-    public final Score score = new Score();
+    public final ScoreImpl score = new ScoreImpl();
     private GameState state;
 
     GameImpl(String homeTeam, String awayTeam) {
@@ -53,45 +53,41 @@ public final class GameImpl implements Game {
     }
 
     @Override
-    public Score updateAwayTeamScore(int score) throws GameStateException {
-        return this.score.updateAwayTeamScore(score);
-    }
-
-    @Override
-    public Score updateHomeTeamScore(int score) throws GameStateException {
-        return this.score.updateHomeTeamScore(score);
-    }
-
-    @Override
     public Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException {
-        this.updateHomeTeamScore(homeTeamScore);
-        return this.updateAwayTeamScore(awayTeamScore);
+        return this.score.updateScore(homeTeamScore, awayTeamScore);
     }
 
-    public class Score {
+    @Override
+    public Score getScore() {
+        return score;
+    }
+
+    public class ScoreImpl implements Score {
         private int homeTeamScore;
         private int awayTeamScore;
 
-        private Score() {
+        private ScoreImpl() {
             this.homeTeamScore = 0;
             this.awayTeamScore = 0;
         }
 
-        private Score updateAwayTeamScore(int score) throws GameStateException {
-            validateChange(score);
+        @Override
+        public Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException {
+            validateScore(homeTeamScore);
+            validateScore(awayTeamScore);
 
-            this.awayTeamScore = score;
+            this.homeTeamScore = homeTeamScore;
+            this.awayTeamScore = awayTeamScore;
             return this;
         }
 
-        public Score updateHomeTeamScore(int score) throws GameStateException {
-            validateChange(score);
-
-            this.homeTeamScore = score;
-            return this;
+        @Override
+        public int totalScore() {
+            return this.awayTeamScore + this.homeTeamScore;
         }
 
-        private void validateChange(int score) throws GameStateException {
+
+        private void validateScore(int score) throws GameStateException {
             if (state != GameState.IN_PROGRESS) {
                 throw new GameStateException("Can't update score for game that is not in progress");
             }

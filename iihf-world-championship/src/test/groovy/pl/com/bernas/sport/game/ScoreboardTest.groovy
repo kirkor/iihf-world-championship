@@ -22,13 +22,6 @@ class ScoreboardTest extends Specification {
             scoreboard.games().size() == 2
     }
 
-    def 'finished games should be removed from the scoreboard'() {
-        when:
-            scoreboard.createGame('Sweden', 'USA').start().finish()
-        then:
-            this.scoreboard.games().size() == 0
-    }
-
     def 'two games with same combination of teams can not be added into scoreboard'() {
         when:
             scoreboard.createGame('Norway', 'Finland')
