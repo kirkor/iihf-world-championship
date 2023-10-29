@@ -1,4 +1,8 @@
-package pl.com.bernas.sport.game;
+package pl.com.bernas.sport.scoreboard;
+
+import pl.com.bernas.sport.game.Game;
+import pl.com.bernas.sport.game.GameState;
+import pl.com.bernas.sport.game.GameStateException;
 
 import java.time.Instant;
 import java.util.Arrays;

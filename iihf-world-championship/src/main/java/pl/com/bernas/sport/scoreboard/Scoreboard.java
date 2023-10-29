@@ -1,4 +1,7 @@
-package pl.com.bernas.sport.game;
+package pl.com.bernas.sport.scoreboard;
+
+import pl.com.bernas.sport.game.Game;
+import pl.com.bernas.sport.game.GameImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,6 +9,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * This is an aggregator for Games. Each Game on the scoreboard will be automatically removed after end time.
+ * Summary of games is ordered  by their total score and time of start.
+ */
 public final class Scoreboard {
 
     private final List<ScoreboardGame> games = new ArrayList<>();

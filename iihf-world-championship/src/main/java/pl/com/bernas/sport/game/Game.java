@@ -1,5 +1,8 @@
 package pl.com.bernas.sport.game;
 
+/**
+ * Each Game is created with state {@see GameState.SCHEDULED}
+ */
 public interface Game {
     String getHomeTeam();
 
@@ -18,12 +21,17 @@ public interface Game {
      * Only scheduled game can be started, otherwise exception will be thrown.
      * After start() Game will be in {@see GameState.IN_PROGRESS} state.
      *
-     * @throws GameStateException when unallowed state is detected
+     * @throws GameStateException when unallowed state transition is detected
      */
     Game start() throws GameStateException;
 
     GameState getState();
 
+    /**
+     * Only games {@see GameState.IN_PROGRESS} can be finished
+     *
+     * @throws GameStateException when unallowed state transition is detected
+     */
     void finish() throws GameStateException;
 
     Score updateScore(int homeTeamScore, int awayTeamScore) throws GameStateException;

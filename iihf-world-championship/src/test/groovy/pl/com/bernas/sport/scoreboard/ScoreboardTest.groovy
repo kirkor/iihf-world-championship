@@ -1,4 +1,5 @@
-package pl.com.bernas.sport.game
+package pl.com.bernas.sport.scoreboard
+
 
 import spock.lang.Specification
 import spock.lang.Subject

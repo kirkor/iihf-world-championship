@@ -1,4 +1,4 @@
-package pl.com.bernas.sport.game;
+package pl.com.bernas.sport.scoreboard;
 
 public class ScoreboardException extends Exception {
     ScoreboardException(String message) {

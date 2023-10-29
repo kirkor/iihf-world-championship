@@ -1,6 +1,6 @@
 package pl.com.bernas.sport.integration
 
-import pl.com.bernas.sport.game.Scoreboard
+import pl.com.bernas.sport.scoreboard.Scoreboard
 import spock.lang.Specification
 import spock.lang.Subject
 

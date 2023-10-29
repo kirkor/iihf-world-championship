@@ -8,7 +8,7 @@ public final class GameImpl implements Game {
     public final ScoreImpl score = new ScoreImpl();
     private GameState state;
 
-    GameImpl(String homeTeam, String awayTeam) {
+    public GameImpl(String homeTeam, String awayTeam) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.state = GameState.SCHEDULED;
